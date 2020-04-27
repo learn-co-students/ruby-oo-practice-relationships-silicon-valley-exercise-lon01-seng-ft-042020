@@ -1,3 +1,4 @@
+#Join class
 class FundingRound
 
     attr_accessor :type, :investment

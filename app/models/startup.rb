@@ -33,4 +33,34 @@ class Startup
        self.all.map{|startup| startup.domain}
    end
 
+ #Instance method that creates a new funding round
+   def sign_contract(vc, type, investment)
+       FundingRound.new(self, vc, type, investment)
+   end
+
+ #Instance method that returns all the funding rounds for a startup instance
+    def all_funds
+       FundingRound.all.select{|round| round.company == self}
+    end  
+   
+ #Instance method that returns the total number of funding rounds that the startup has gotten
+    def num_funding_rounds
+        self.all_funds.count
+    end
+
+ #Instance method that returns the total sum of investments that the startup has gotten
+    def total_funds
+        self.all_funds.sum{|round| round.investment}
+    end
+
+ #Instance method that returns a unique array of all the VCs that have invested in this company
+    def investors
+        self.all_funds.map{|round| round.vc}.uniq
+    end   
+
+ #Instance method that returns a unique array of all the Trés Commas club VCs that have invested in this company
+    def big_investors
+        self.investors.select{|vc| vc.total_worth > 1000000000}
+    end     
+    
 end
