@@ -1,66 +1,51 @@
+require 'pry'
+
 class Startup
 
     attr_accessor :name, :domain
     attr_reader :founder
-     
-    @@all = [ ]
 
-   def initialize(name, founder, domain)
-       @name = name
-       @founder = founder
-       @domain = domain
-       @@all << self
-   end
+    @@all = []
 
-#Instance method that changes the domain and name of the startup instance
-   def pivot(domain, name)
-       self.domain = domain
-       self.name = name
-   end
-
- #Class method that returns an array of all of the startup instances  
-   def self.all
-       @@all
-   end
-
- #Class method that returns the first startup whose founder's name matches
-    def self.find_by_founder(founder)
-        self.all.find{|startup| startup.founder == founder}
+    def initialize(name, founder, domain)
+        @name = name
+        @founder = founder
+        @domain = domain
+        @@all.push(self)
     end
 
- #Class method that returns an array of all of the different startup domains  
-   def self.domains
-       self.all.map{|startup| startup.domain}
-   end
-
- #Instance method that creates a new funding round
-   def sign_contract(vc, type, investment)
-       FundingRound.new(self, vc, type, investment)
-   end
-
- #Instance method that returns all the funding rounds for a startup instance
-    def all_funds
-       FundingRound.all.select{|round| round.company == self}
-    end  
-   
- #Instance method that returns the total number of funding rounds that the startup has gotten
-    def num_funding_rounds
-        self.all_funds.count
+    def name
+        @name
     end
 
- #Instance method that returns the total sum of investments that the startup has gotten
-    def total_funds
-        self.all_funds.sum{|round| round.investment}
+    def founder
+        @founder
     end
 
- #Instance method that returns a unique array of all the VCs that have invested in this company
-    def investors
-        self.all_funds.map{|round| round.vc}.uniq
-    end   
+    def domain
+        @domain
+    end
 
- #Instance method that returns a unique array of all the Trés Commas club VCs that have invested in this company
-    def big_investors
-        self.investors.select{|vc| vc.total_worth > 1000000000}
-    end     
+    def pivot(new_name, new_domain)
+        @name = new_name
+        @domain = new_domain
+    end
+
+    def self.all
+        @@all
+    end
+
+    def self.domains
+        Startup.all.map{|startup| startup.domain}
+    end
+
+    def self.find_by_founder(founder_name)
+        Startup.all.find{|startup| startup.founder==founder_name}
+    end    
+
+    su1 = Startup.new("ig", "zuck", "ig.com")
+    su2 = Startup.new("link", "Theaj", "linkup.com")
+    su3 = Startup.new("amazon", "Bezons", "amazon.com")
     
+    binding.pry
 end
