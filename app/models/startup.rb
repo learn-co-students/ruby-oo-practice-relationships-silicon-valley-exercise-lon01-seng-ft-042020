@@ -36,11 +36,11 @@ class Startup
     end
 
     def self.domains
-        Startup.all.map{|startup| startup.domain}
+        self.all.map{|startup| startup.domain}
     end
 
     def self.find_by_founder(founder_name)
-        Startup.all.find{|startup| startup.founder==founder_name}
+        self.all.find{|startup| startup.founder==founder_name}
     end    
 
     su1 = Startup.new("ig", "zuck", "ig.com")

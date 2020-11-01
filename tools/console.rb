@@ -15,10 +15,9 @@ su3 = Startup.new("amazon", "Bezons", "amazon.com")
 
 binding.pry
 
-# vc1 = VentureCapitalist.new("goldmans", 67)
-# vc2 = VentureCapitalist.new("santander", 7000)
-# vc3 = VentureCapitalist.new("trust", 1000000345)
-
+vc1 = VentureCapitalist.new("goldmans", 67)
+vc2 = VentureCapitalist.new("santander", 7000)
+vc3 = VentureCapitalist.new("trust", 1000000345)
 
 #  fr1 = su1.sign_contract(vc1, "Seed", 10000)
 #  fr3 = su1.sign_contract(vc3, "Seed", 65)
